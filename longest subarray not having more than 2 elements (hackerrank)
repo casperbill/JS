@@ -1,0 +1,22 @@
+function max_two_distinct(arr){
+let max=0;
+const count=[],elem=[];
+count.push(1);elem.push(arr[0]);
+for (let i=1;i<arr.length;i++){
+if (Math.abs(arr[i]-arr[i-1])<2)
+{
+if (elem.includes(arr[i]) || elem.length==1) {count.push(count[i-1]+1);
+if (elem.length==1) elem.push(arr[i]);
+}
+else {
+//new element found and elem.size ==2
+let j=i-2;//we should know size of this subarray from this element
+while (j>=0 && arr[j]==arr[i-1]) j--;
+count.push(i-j);
+}
+
+}else count.push(1);
+max=Math.max(max,count[i]);}
+return max;
+}
+
